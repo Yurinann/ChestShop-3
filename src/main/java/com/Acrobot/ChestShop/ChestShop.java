@@ -24,7 +24,6 @@ import com.Acrobot.ChestShop.Listeners.Item.ItemStringListener;
 import com.Acrobot.ChestShop.Listeners.ItemInfoListener;
 import com.Acrobot.ChestShop.Listeners.Modules.ItemAliasModule;
 import com.Acrobot.ChestShop.Listeners.Modules.MetricsModule;
-import com.Acrobot.ChestShop.Listeners.Modules.StockCounterModule;
 import com.Acrobot.ChestShop.Listeners.ShopInfoListener;
 import com.Acrobot.ChestShop.Listeners.SignParseListener;
 import com.Acrobot.ChestShop.Listeners.Modules.DiscountModule;
@@ -432,7 +431,6 @@ public class ChestShop extends JavaPlugin {
         registerEvent(new DiscountModule());
         registerEvent(new MetricsModule());
         registerEvent(new PriceRestrictionModule());
-        registerEvent(new StockCounterModule());
 
         registerEconomicalModules();
     }
