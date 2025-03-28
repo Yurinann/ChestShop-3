@@ -47,6 +47,8 @@ YOU_SOLD_TO_SHOP: "你以 %price 的价格卖出物品 %item 给 %buyer ."
 SOMEBODY_SOLD_TO_YOUR_SHOP: "%seller 以 %price 的价格卖出物品 %item 给你."
 YOU_CANNOT_CREATE_SHOP: "你不能创建这种类型的商店!"
 NO_CHEST_DETECTED: "找不到箱子!"
+CANNOT_CREATE_ON_CHEST_SIDE: "创建商店时，告示牌不能放在箱子侧面！"
+
 INVALID_SHOP_DETECTED: "这个商店无法使用!"
 INVALID_SHOP_PRICE: "该商店的价格无效!"
 INVALID_SHOP_QUANTITY: "商店有无效的数量！"

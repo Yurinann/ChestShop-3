@@ -10,8 +10,12 @@ import com.Acrobot.ChestShop.Listeners.Block.Break.SignBreak;
 import com.Acrobot.ChestShop.Signs.ChestShopSign;
 import com.Acrobot.ChestShop.UUIDs.NameManager;
 import com.Acrobot.ChestShop.Utils.uBlock;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.block.Sign;
+import org.bukkit.block.data.BlockData;
+import org.bukkit.block.data.Directional;
 import org.bukkit.block.sign.Side;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -35,6 +39,10 @@ public class SignCreate implements Listener {
         }
     }
 
+    /**
+     * Create Shop
+     * @param event
+     */
     @EventHandler(ignoreCancelled = true)
     public static void onSignChange(SignChangeEvent event) {
         Block signBlock = event.getBlock();
@@ -51,6 +59,24 @@ public class SignCreate implements Listener {
                 Messages.CANNOT_CHANGE_SIGN_BACKSIDE.sendWithPrefix(event.getPlayer());
             }
             return;
+        }
+
+        BlockData blockData = sign.getBlockData();
+
+        if (blockData instanceof Directional) {
+            if (ChestShopSign.isValidPreparedSign(StringUtil.stripColourCodes(event.getLines()))) {
+                Directional directional = (Directional) blockData;
+                BlockFace attachedFace = directional.getFacing().getOppositeFace();
+                Block attachedBlock = signBlock.getRelative(attachedFace);
+
+                if (BlockUtil.isChest(attachedBlock) && BlockUtil.isSideFace(attachedFace)) {
+                    event.setCancelled(true);
+                    signBlock.breakNaturally();
+                    Messages.CANNOT_CREATE_ON_CHEST_SIDE.sendWithPrefix(event.getPlayer());
+                    ChestShop.logDebug("Blocked shop creation on chest side at " + signBlock.getLocation());
+                    return;
+                }
+            }
         }
 
         if (ChestShopSign.isValid(event.getLines()) && !NameManager.canUseName(event.getPlayer(), OTHER_NAME_DESTROY, ChestShopSign.getOwner(event.getLines()))) {

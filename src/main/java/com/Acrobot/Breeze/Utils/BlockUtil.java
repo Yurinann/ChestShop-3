@@ -121,4 +121,17 @@ public class BlockUtil {
     public static boolean isLoaded(Block block) {
         return block.getWorld().isChunkLoaded(block.getX() >> 4, block.getZ() >> 4);
     }
+
+    /**
+     * Check the block's face to
+     *
+     * @param face
+     * @return to
+     */
+    public static boolean isSideFace(BlockFace face) {
+        return face == BlockFace.NORTH
+                || face == BlockFace.SOUTH
+                || face == BlockFace.EAST
+                || face == BlockFace.WEST;
+    }
 }
